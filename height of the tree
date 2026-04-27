@@ -1,0 +1,19 @@
+import sys
+def solve():
+    data=sys.stdin.read().split()
+    if not data:
+        return
+    n=int(data[0])
+    parents=[int(x) for x in data[1:]]
+    max_height=0
+    for i in range(n):
+        current_height=0
+        p=parents[i]
+        while p!=-1:
+            current_height +=1
+            p=parents[p]
+        if current_height>max_height:
+            max_height=current_height
+    print(max_height)
+if __name__=="__main__":
+    solve()

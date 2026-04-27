@@ -1,0 +1,5 @@
+n=input()
+data=input().split()
+print(*(data))
+print(*(data[::-1]))
+print(f"The doubly linked list is {'a' if data==data[::-1] else 'not a'} palindrome")

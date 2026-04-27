@@ -1,0 +1,41 @@
+import sys 
+import json
+def wordbreaks(s,worddict):
+    wordset=set(worddict)
+    memo={}
+    def solve(currents):
+        if currents in memo:
+            return memo[currents]
+        if not currents:
+            return[""]
+        res=[]
+        for i in range(1,len(currents)+1):
+            prefix=currents[:i]
+            if prefix in wordset:
+                suffixes=solve(currents[i:])
+                for suffix in suffixes:
+                    if suffix=="":
+                        res.append(prefix)
+                    else:
+                        res.append(prefix+" "+suffix)
+        memo[currents]=res
+        return res
+    ans=solve(s)
+    ans.sort()
+    return ans
+def main():
+    try:
+        inputdata=sys.stdin.read().splitlines()
+        if not inputdata:
+            return
+        s=inputdata[0].strip().replace('"','').replace("'","")
+        n=int(inputdata[1].strip())
+        worddict=[]
+        for i in range(2,2+n):
+            worddict.append(inputdata[i].strip().replace('"','').replace("'",""))
+        result=wordbreaks(s,worddict)
+        print(json.dumps(result))
+    except(EOFError,ValueError,Indexerror):
+        pass
+if __name__=="__main__":
+    main()

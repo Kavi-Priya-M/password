@@ -1,0 +1,19 @@
+n=int(input())
+a=list(map(int,input().split()))
+k=int(input())
+l,h=max(a),sum(a)
+while l<h:
+    m=(l+h)//2
+    s=0
+    p=1
+    for x in a:
+        if s+x>m:
+            p+=1
+            s=x
+        else:
+            s+=x
+    if p<=k:
+        h=m
+    else:
+        l=m+1
+print(l)

@@ -1,0 +1,5 @@
+import sys
+data=sys.stdin.read().split()
+if data:
+    queue_elements=data[1:]
+    print(len(set(queue_elements)))

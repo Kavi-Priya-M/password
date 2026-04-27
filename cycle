@@ -1,0 +1,51 @@
+import heapq
+import sys
+def solve():
+    input_data=sys.stdin.read().split()
+    if not input_data:
+        return
+    try:
+        v_count=int(input_data[0])
+        e_count=int(input_data[1])
+    except(IndexError,ValueError):
+        return
+    
+    adj=[[] for _ in range(v_count)]
+    edges=[]
+    ptr=2
+    for _ in range(e_count):
+        if ptr+2>=len(input_data):break
+        u,v,w=int(input_data[ptr]),int(input_data[ptr+1]),int(input_data[ptr+2])
+        adj[u].append((v,w))
+        adj[v].append((u,v,w))
+        ptr+=3
+    min_cycle=float('inf')
+    for u,v,w in edges:
+        if w>=min_cycle:
+            continue
+        dist=[float('inf')]*v_count
+        dist[u]=0
+        pq=[(0,u)]
+        found_path=float('inf')
+        while pq:
+            d,curr=heapq.heappop(pq)
+            if d>dist[curr]:
+                continue
+            if d+w>=min_cycle:
+                break
+            if curr==v:
+                found_path=d
+                break
+            for neighbor,weight in adj[curr]:
+                new_dist=d+weight
+                if new_dist<dist[neighbor]:
+                    dist[neigbor]=new_dist
+                    heapq.heappuh(pq,(new_dist,neighbor))
+        if found_path!=float('inf'):
+            min_cycle=min(min_cycle,found_path +w)
+    if min_cycle==float('inf'):
+        print("No cycle found in the graph.")
+    else:
+        print(f"Length of the stortest cycle:{min_cycle}")
+if __name__=="__main__":
+    solve()

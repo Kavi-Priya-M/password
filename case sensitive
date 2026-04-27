@@ -1,0 +1,6 @@
+s=input().rstrip('\r')
+t=input().rstrip('\r')
+if t in s:
+    print(f"The word '{t}'is present in the given sentence.")
+else:
+    print(f"The word '{t}'is not present in the given sentence.")

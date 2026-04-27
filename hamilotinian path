@@ -1,0 +1,24 @@
+def solve():
+    n = int(input())
+    g =[list(map(int,input().split()))
+for _ in range(n)]
+    
+    path = [0]
+    
+    def backtrack():
+        if len(path) ==n:
+            return g[path[-1]][0]==1
+            
+        for v in range(1,n):
+            if v not in path and g[path[-1]][v] == 1:
+              path.append(v)
+              if backtrack():
+                  return True
+              path.pop()
+        return False
+        
+    if backtrack():
+        print(*path,0)
+    else:
+        print("Hamiltonion path does not exists")
+solve()

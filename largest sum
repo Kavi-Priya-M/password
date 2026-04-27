@@ -1,0 +1,15 @@
+import sys
+def solve():
+    data=list(map(int, sys.stdin.read().split()))
+    if not data:
+        return
+    n=data[0]
+    num=data[1:n+1]
+    res=curr=num[0]
+    for x in num[1:]:
+        curr=max(x,curr+x)
+        if curr>res:
+            res=curr
+    print(res)
+if __name__=="__main__":
+    solve()

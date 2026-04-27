@@ -1,0 +1,8 @@
+import sys
+
+def maxAlternateSum(arr, n):
+nums=arr[:n]
+    if not nums:
+        return 0
+    result = sum(nums)-min(nums)
+    return result

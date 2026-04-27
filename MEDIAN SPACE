@@ -1,0 +1,23 @@
+import sys
+import bisect
+def solve():
+    data=sys.stdin.read().split()
+    if not data:
+        return
+    n=int(data[0])
+    elements=[int(x) for x in data[1:n+1]]
+    sortedstream=[]
+    for x in elements:
+        bisect.insort(sortedstream,x)
+        length=len(sortedstream)
+        mid=length//2
+        if length%2!=0:
+            median=float(sortedstream[mid])
+        else:
+            median=(sortedstream[mid-1]+sortedstream[mid])/2.0
+        if median%1==0:
+            print(int(median))
+        else:
+            print(median)
+if __name__=="__main__":
+    solve()

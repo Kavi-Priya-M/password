@@ -1,0 +1,18 @@
+import sys
+def solve():
+    input_data=sys.stdin.read().split()
+    if len(input_data)<2:
+        return
+    order=input_data[0]
+    s=input_data[1]
+    result=[]
+    for char in order:
+        count=s.count(char)
+        if count>0:
+            result.append(char*count)
+    for char in s:
+        if char not in order:
+            result.append(char)
+    print("".join(result))
+if __name__=="__main__":
+    solve()

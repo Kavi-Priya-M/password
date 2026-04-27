@@ -1,0 +1,17 @@
+import sys
+def solve():
+    d=list(map(int,sys.stdin.read().split()))
+    if not d:
+        return
+    n=d[0]
+    val=d[1:n+1]
+    wt=d[n+1:2*n+1]
+    w=d[-1]
+    dp=[0]*(w+1)
+    for i in range(n):
+        for j in range(w,wt[i]-1,-1):
+            if dp[j-wt[i]]+val[i]>dp[j]:
+                dp[j]=dp[j-wt[i]]+val[i]
+    print(dp[w])
+if __name__=="__main__":
+    solve()

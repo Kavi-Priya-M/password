@@ -1,0 +1,17 @@
+import sys
+from functools import lru_cache
+sys.setrecursionlimit(2000)
+def solve():
+    data=list(map(int,sys.stdin.read().split()))
+    if not data:
+        return
+    n=data[0]
+    f=data[n+1:2*n+1]
+    @lru_cache(None)
+    def cost(i,j):
+        if i>j:
+            return 0
+        return sum(f[i:j+1])+min(cost(i,k-1)+cost(k+1,j) for k in range(i,j+1))
+    print(f"Cost of optimal BST is {cost(0,n-1)}")
+if __name__=="__main__":
+    solve()

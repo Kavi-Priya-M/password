@@ -1,0 +1,9 @@
+import sys
+n, *a=map(int,sys.stdin.read().split())
+swaps=0
+for i in range(n):
+    m=a.index(min(a[i:]),i)
+    if m!=i:
+        a[i],a[m]=a[m],a[i]
+        swaps+=1
+print(swaps)

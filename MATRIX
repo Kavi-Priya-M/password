@@ -1,0 +1,32 @@
+import sys
+sys.setrecursionlimit(2000)
+def solve():
+    data = sys.stdin.read().split()
+    if not data:
+        return
+    try:
+        R=int(data[0])C=int(data[1])
+        flat=[int(x) for x in data[2:]]
+        matrix=[]
+        for i in range(R):
+            matrix.append(flat[i*C:(i+1)*C])
+        memo=[[0 for _ in range(C)] for _ in range(R)]
+        def dfs(r,c):
+            if memo[r][c]!=0:
+                return memo[r][c]
+            max_len=1
+            for dr,dc in [(-1,0),(1,0),(0,-1),(0,1)]:
+                nr,nc=r+dr,c+dc
+                if 0<= nr<R and 0<=nc <C and matrix[nr][nc]>matrix[r][c]:
+                    max_len=max(max_len,1+dfs(nr,nc))
+            memo[r][c]=max_len
+            return max_len
+        ans=0
+        for r in range(R):
+            for c in range(C):
+                ans=max(ans,dfs(r,c))
+        print(ans)
+    except(ValueError,IndexError):
+        pass
+if __name__=="__main__":
+    solve()
